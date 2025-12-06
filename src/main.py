@@ -3,12 +3,22 @@ import multiprocessing
 import os
 import math
 import time
+import sys
 from concurrent.futures import ProcessPoolExecutor
 from tqdm import tqdm
 
 # Import our custom modules
 import utils
 import converter
+
+# Fix UTF-8 encoding for Windows console to display emojis
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except AttributeError:
+        # Python < 3.7 fallback
+        import codecs
+        sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Modular ARW to JPG Converter")
@@ -119,11 +129,17 @@ def main():
 
     avg_time = elapsed_time / len(files) if len(files) > 0 else 0
     print(f"⏱️  Time: {time_str} (avg {avg_time:.2f}s per image)")
-    
+
     if errors:
         print("\n❌ Errors:")
         for err in errors:
             print(err)
+
+    # 8. Save output directory path to temp file for batch file
+    import tempfile
+    temp_dir = tempfile.gettempdir()
+    with open(os.path.join(temp_dir, "arw2jpg_dir.txt"), "w", encoding="utf-8") as f:
+        f.write(str(output_dir))
 
 
 if __name__ == "__main__":
