@@ -10,11 +10,17 @@ Designed for **Windows Drag-and-Drop** simplicity with engineer-grade logging an
 
 ## ⚡ Features
 
-* **Zero-Config Usage:** Just drag a folder or file onto `main.bat`.
+* **Zero-Config Usage:** Just drag a folder or file onto `arw2jpg.bat`.
+* **Auto-Dependency Installation:** First run automatically installs required Python packages.
 * **Auto-Organization:** Creates a clean, date-stamped output folder (e.g., `arw2jpg_2025-12-06`) inside the source directory.
-* **Multiprocessing:** Automatically detects CPU cores and parallelizes the conversion (approx. 4-10x faster than standard scripts).
+* **Multiprocessing:** Uses 50% of CPU cores by default (configurable with `--unlock-cpu` for 100% power).
 * **Smart Skipping:** Checks if the output JPG already exists to prevent redundant processing.
+* **Processing Time Tracking:** Shows total conversion time and average time per image.
+* **Auto-Open Output:** Automatically opens the output folder when conversion completes.
+* **Quality Control:** Adjustable JPEG quality (1-100, default 90) with validation.
+* **Path with Spaces Support:** Handles Windows paths containing spaces correctly.
 * **Sony Optimized:** Uses `libraw` (via `rawpy`) for accurate "As Shot" white balance and color rendering.
+* **UTF-8 Support:** Works correctly on all Windows locales (including Thai, Japanese, etc.).
 
 ## 📂 Project Structure
 
