@@ -74,7 +74,7 @@ echo Target: %TARGET%
 echo.
 
 :: Run main.py (output directory path will be saved to temp file)
-python "%~dp0src\main.py" %TARGET%
+python "%~dp0src\main.py" "%TARGET%"
 
 :: Read the output directory path from temp file
 if exist "%TEMP%\arw2jpg_dir.txt" (
