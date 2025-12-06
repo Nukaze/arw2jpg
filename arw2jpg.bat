@@ -79,5 +79,5 @@ python "%~dp0src\main.py" %TARGET%
 :: 5. Finish
 :: ---------------------------------------------------------
 echo.
-echo Done.
+echo [DONE]
 pause
