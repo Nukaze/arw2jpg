@@ -1,5 +1,6 @@
 @echo off
 TITLE ARW2JPG Launcher
+chcp 65001 >nul
 CLS
 
 :: ---------------------------------------------------------
@@ -72,11 +73,26 @@ echo Starting Conversion...
 echo Target: %TARGET%
 echo.
 
-:: Run main.py
+:: Run main.py (output directory path will be saved to temp file)
 python "%~dp0src\main.py" %TARGET%
 
+:: Read the output directory path from temp file
+if exist "%TEMP%\arw2jpg_dir.txt" (
+    set /p OUTPUT_PATH=<"%TEMP%\arw2jpg_dir.txt"
+    del "%TEMP%\arw2jpg_dir.txt"
+)
+
 :: ---------------------------------------------------------
-:: 5. Finish
+:: 5. Open Output Folder
+:: ---------------------------------------------------------
+if defined OUTPUT_PATH (
+    echo.
+    echo [System] Opening output folder...
+    start "" "%OUTPUT_PATH%"
+)
+
+:: ---------------------------------------------------------
+:: 6. Finish
 :: ---------------------------------------------------------
 echo.
 echo [DONE]
