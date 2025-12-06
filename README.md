@@ -30,7 +30,7 @@ arw2jpg/
 ├── requirements.txt
 ├── README.md
 └── src/
-    ├── __init__.py        # (Empty file, makes 'src' a package)
+    ├── __init__.py        # Package metadata (version, maintainer, license)
     ├── main.py            # Orchestrator (CLI & Progress Bar)
     ├── converter.py       # The Engine (Image Processing Logic)
     └── utils.py           # The Helper (Path & File Management)
