@@ -1,12 +1,72 @@
 # arw2jpg
 
-A high-performance, multiprocessing tool to batch convert Sony RAW (`.ARW`) files to High-Quality JPEG images. 
+A high-performance, multiprocessing tool to batch convert Sony RAW (`.ARW`) files to High-Quality JPEG images.
 
 Designed for **Windows Drag-and-Drop** simplicity with engineer-grade logging and speed.
 
 ![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Platform](https://img.shields.io/badge/platform-win%20%7C%20linux-lightgrey)
+
+---
+
+## 🚀 Quick Start (For Users)
+
+### Super Simple 3-Step Process
+
+#### Step 1️⃣: Double-Click `arw2jpg.bat`
+Find the `arw2jpg.bat` file in your project folder and double-click it.
+
+#### Step 2️⃣: Drag Your Folder
+When the window opens, **drag and drop** your folder (or single `.ARW` file) onto the window.
+
+**You can drag:**
+- 📁 A whole folder of `.ARW` files
+- 📷 A single `.ARW` file
+
+**OR** if drag-and-drop doesn't work, paste the full path and press Enter.
+
+#### Step 3️⃣: Done!
+Watch the progress bar! The output folder **opens automatically** when finished. ✨
+
+### 📂 Where Are My Files?
+
+Your converted JPEGs will be in a **new folder** created inside your source folder:
+
+```
+📁 Your Original Folder/
+   📷 photo1.ARW
+   📷 photo2.ARW
+   📁 arw2jpg_2025-12-06/  ← NEW! (opens automatically)
+      🖼️ photo1.jpg
+      🖼️ photo2.jpg
+```
+
+### ✅ What You'll See
+
+```
+📂 Source: C:\Photos\vacation
+🎯 Output: C:\Photos\vacation\arw2jpg_2025-12-06
+📸 Count:  59 files
+⚙️  CPU:    50% (6/12 Cores used)
+----------------------------------------
+100%|████████████████████| 59/59 [00:37<00:00, 1.56img/s]
+----------------------------------------
+✅ Processed: 59/59
+⏱️  Time: 37.8s (avg 0.64s per image)
+
+[System] Opening output folder...
+```
+
+### 🆘 Troubleshooting
+
+| Problem | Solution |
+|---------|----------|
+| "Python is not recognized" | Install Python from [python.org](https://www.python.org) - check "Add to PATH" |
+| "No ARW files found" | Make sure you selected the correct folder with `.ARW` files |
+| Files already exist? | Already converted files are **skipped** automatically (faster!) |
+
+---
 
 ## ⚡ Features
 
@@ -22,21 +82,22 @@ Designed for **Windows Drag-and-Drop** simplicity with engineer-grade logging an
 * **Sony Optimized:** Uses `libraw` (via `rawpy`) for accurate "As Shot" white balance and color rendering.
 * **UTF-8 Support:** Works correctly on all Windows locales (including Thai, Japanese, etc.).
 
-## 🚀 Quick Start
+---
+
+# 🛠️ Developer Section
+
+> **Note for Users:** Everything above is all you need to use the tool! The sections below are for developers who want to customize or understand the technical details.
+
+---
+
+## 💻 Command Line Usage (Advanced)
 
 ### Prerequisites
 - Python 3.8 or higher
-- Windows OS (for drag-and-drop `.bat` launcher)
+- Windows OS (for `.bat` launcher) or Linux/Mac (run Python directly)
 
-### Usage
+### Manual Command Line
 
-**Method 1: Drag and Drop (Recommended)**
-1. Drag a folder or `.ARW` file onto `arw2jpg.bat`
-2. Dependencies auto-install on first run
-3. Watch the progress bar
-4. Output folder opens automatically when done!
-
-**Method 2: Command Line**
 ```bash
 # Basic usage (default quality 90, 50% CPU)
 python src/main.py "C:\path\to\arw\files"
@@ -49,20 +110,6 @@ python src/main.py "C:\path\to\arw\files" --unlock-cpu
 
 # Combine options
 python src/main.py "C:\path\to\arw\files" --quality 85 --unlock-cpu
-```
-
-### Output Example
-```
-📂 Source: C:\Photos\vacation_2024
-🎯 Output: C:\Photos\vacation_2024\arw2jpg_2025-12-06
-📸 Count:  59
-⚙️  CPU:    50% (6/12 Cores used)
-    (Note: Use --unlock-cpu to use 100% power)
-----------------------------------------
-100%|████████████████████| 59/59 [00:37<00:00,  1.56img/s]
-----------------------------------------
-✅ Processed: 59/59
-⏱️  Time: 37.8s (avg 0.64s per image)
 ```
 
 ---
