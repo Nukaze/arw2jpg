@@ -90,6 +90,8 @@ def main():
     errors = []
 
     # 6. Run the Engine (Converter)
+    start_time = time.time()
+
     with ProcessPoolExecutor(max_workers=max_workers) as executor:
         # We call the wrapper function in converter.py
         results = list(tqdm(executor.map(converter.worker_wrapper, tasks), total=len(tasks), unit="img"))
@@ -100,9 +102,23 @@ def main():
             elif res['status'] == 'error':
                 errors.append(f"{res['file']}: {res['msg']}")
 
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+
     # 7. Final Report
     print("-" * 40)
     print(f"✅ Processed: {success_count}/{len(files)}")
+
+    # Format time display
+    if elapsed_time < 60:
+        time_str = f"{elapsed_time:.1f}s"
+    else:
+        minutes = int(elapsed_time // 60)
+        seconds = int(elapsed_time % 60)
+        time_str = f"{minutes}m {seconds}s"
+
+    avg_time = elapsed_time / len(files) if len(files) > 0 else 0
+    print(f"⏱️  Time: {time_str} (avg {avg_time:.2f}s per image)")
     
     if errors:
         print("\n❌ Errors:")
