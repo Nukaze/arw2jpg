@@ -69,7 +69,12 @@ def calculate_workers(unlock_cpu_flag):
 def main():
     # 1. Setup
     args = parse_arguments()
-    
+
+    # Validate quality parameter
+    if not 1 <= args.quality <= 100:
+        print(f"❌ Error: Quality must be between 1-100 (got {args.quality})")
+        sys.exit(1)
+
     # 2. Use Utils to find files
     files, base_dir = utils.get_input_files(args.path)
     
