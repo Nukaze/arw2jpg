@@ -13,7 +13,7 @@ def process_image(file_path, output_folder, quality):
 
         # Check if already exists (Skip feature)
         if output_path.exists():
-            return {"status": "skipped", "path": str(output_path)}
+            return {"status": "skipped", "file": file_path.name, "path": str(output_path)}
 
         # Conversion Logic
         with rawpy.imread(str(file_path)) as raw:
@@ -22,11 +22,11 @@ def process_image(file_path, output_folder, quality):
             
             # Save Image
             imageio.imsave(str(output_path), rgb, quality=quality, subsampling=0)
-            
-        return {"status": "success", "path": str(output_path)}
+
+        return {"status": "success", "file": file_path.name, "path": str(output_path)}
 
     except Exception as e:
-        return {"status": "error", "file": file_path.name, "msg": str(e)}
+        return {"status": "error", "file": file_path.name, "path": None, "msg": str(e)}
 
 def worker_wrapper(args):
     """
